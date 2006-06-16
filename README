@@ -1,0 +1,91 @@
+gpgme
+-------------------------------------------
+GPGME  (GnuPG Made Easy) is a C language library that allows to add 
+support for cryptography to a program. It is designed to make access to 
+public key crypto engines like GnuPG easier for applications. 
+GPGME provides a high-level crypto API for encryption, decryption, 
+signing, signature verification and key management.
+
+Runtime requirements:
+  cygwin-1.5.19-4
+  gnupg-1.4.2.1-1
+  libgpg-error-1.1-1
+
+Build requirements:
+(besides corresponding -devel packages)
+  cygwin-1.5.19-4
+  autoconf2.5-2.59-3
+  automake1.9-1.9.6-1
+  binutils-20050610-1
+  gawk-3.1.5-2
+  gcc-core-3.4.4-1
+  libtool1.5-1.5.20-2
+  make-3.80-1
+  sed-4.1.3-1
+
+Canonical homepage:
+  http://www.gnupg.org/(en)/related_software/gpgme/
+
+Canonical download:
+  ftp://ftp.gnupg.org/gcrypt/gpgme/
+
+-------------------------------------------
+
+Build instructions:
+  unpack gpgme-1.0.3-1-src.tar.bz2
+    if you use setup to install this src package, it will be
+	 unpacked under /usr/src automatically
+  cd /usr/src
+  ./gpgme-1.0.3-1.sh all
+
+This will create:
+  /usr/src/gpgme-1.0.3-1-src.tar.bz2
+  /usr/src/gpgme-1.0.3-1.tar.bz2
+  /usr/src/libgpgme11-1.0.3-1.tar.bz2
+
+-------------------------------------------
+
+Files included in the binary package:
+
+  /etc/postinstall/gpgme.sh
+  /usr/bin/gpgme-config
+  /usr/include/gpgme-1.0/gpgme.h
+  /usr/lib/libgpgme-pthread.dll.a
+  /usr/lib/libgpgme-pthread.la
+  /usr/lib/libgpgme.dll.a
+  /usr/lib/libgpgme.la
+  /usr/share/aclocal/gpgme.m4
+  /usr/share/doc/Cygwin/gpgme-1.0.3.README
+  /usr/share/doc/gpgme-1.0.3/AUTHORS
+  /usr/share/doc/gpgme-1.0.3/ChangeLog
+  /usr/share/doc/gpgme-1.0.3/COPYING
+  /usr/share/doc/gpgme-1.0.3/INSTALL
+  /usr/share/doc/gpgme-1.0.3/NEWS
+  /usr/share/doc/gpgme-1.0.3/README
+  /usr/share/doc/gpgme-1.0.3/THANKS
+  /usr/share/doc/gpgme-1.0.3/TODO
+  /usr/share/info/gpgme.info.gz
+
+Files included in the library package:
+
+  /usr/bin/cyggpgme-11.dll
+  /usr/bin/cyggpgme-pthread-11.dll
+
+------------------
+
+Port Notes:
+
+----- version 1.0.3-1 -----
+Version bump.
+Created separate library package.
+
+----- version 1.0.2-1 -----
+New upstream version.
+Header now installed in its own directory; gpgme-config points to it.
+
+----- version 1.0.0-1 -----
+Initial release for Cygwin.
+
+
+Cygwin port maintained by:
+http://cygwinports.dotsrc.org/
