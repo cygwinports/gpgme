@@ -7,25 +7,25 @@ GPGME provides a high-level crypto API for encryption, decryption,
 signing, signature verification and key management.
 
 Runtime requirements:
-  cygwin-1.5.21-2
-  gnupg-1.4.5-1
-  libgpg-error-1.1-1
+  cygwin-1.5.24-2
+  gnupg
+  libgpg-error0-1.5-1
 
 Build requirements:
 (besides corresponding -devel packages)
-  cygwin-1.5.21-2
-  autoconf2.5-2.60-1
+  cygwin-1.5.24-2
+  autoconf2.5-2.61-1
   automake1.9-1.9.6-1
   binutils-20060817-1
-  cygport-0.2.6-1
-  gawk-3.1.5-2
-  gcc-core-3.4.4-1
-  libtool1.5-1.5.23a-1
+  cygport-0.2.11-1
+  gawk-3.1.5-4
+  gcc-core-3.4.4-3
+  libtool1.5-1.5.23a-2
   make-3.81-1
-  sed-4.1.5-1
+  sed-4.1.5-2
 
 Canonical homepage:
-  http://www.gnupg.org/(en)/related_software/gpgme/
+  http://www.gnupg.org/related_software/gpgme/
 
 Canonical download:
   ftp://ftp.gnupg.org/gcrypt/gpgme/
@@ -33,17 +33,17 @@ Canonical download:
 -------------------------------------------
 
 Build instructions:
-  unpack gpgme-1.0.3-1-src.tar.bz2
+  unpack gpgme-1.1.4-X-src.tar.bz2
     if you use setup to install this src package, it will be
 	 unpacked under /usr/src automatically
   cd /usr/src
-  cygport ./gpgme-1.0.3-1.cygport all
+  cygport ./gpgme-1.1.4-X.cygport all
 
 This will create:
-  /usr/src/gpgme-1.0.3-1-src.tar.bz2
-  /usr/src/gpgme-1.0.3-1.tar.bz2
-  /usr/src/libgpgme-devel-1.0.3-1.tar.bz2
-  /usr/src/libgpgme11-1.0.3-1.tar.bz2
+  /usr/src/gpgme-1.1.4-X-src.tar.bz2
+  /usr/src/gpgme-1.1.4-X.tar.bz2
+  /usr/src/libgpgme-devel-1.1.4-X.tar.bz2
+  /usr/src/libgpgme11-1.1.4-X.tar.bz2
 
 -------------------------------------------
 
@@ -51,15 +51,18 @@ Files included in the binary packages:
 
 (gpgme)
   /etc/postinstall/gpgme.sh
-  /usr/share/doc/Cygwin/gpgme-1.1.2.README
-  /usr/share/doc/gpgme-1.1.2/AUTHORS
-  /usr/share/doc/gpgme-1.1.2/COPYING
-  /usr/share/doc/gpgme-1.1.2/ChangeLog
-  /usr/share/doc/gpgme-1.1.2/INSTALL
-  /usr/share/doc/gpgme-1.1.2/NEWS
-  /usr/share/doc/gpgme-1.1.2/README
-  /usr/share/doc/gpgme-1.1.2/THANKS
-  /usr/share/doc/gpgme-1.1.2/TODO
+  /usr/share/common-lisp/source/gpgme/gpgme-package.lisp
+  /usr/share/common-lisp/source/gpgme/gpgme.asd
+  /usr/share/common-lisp/source/gpgme/gpgme.lisp
+  /usr/share/doc/Cygwin/gpgme-1.1.4.README
+  /usr/share/doc/gpgme-1.1.4/AUTHORS
+  /usr/share/doc/gpgme-1.1.4/COPYING
+  /usr/share/doc/gpgme-1.1.4/ChangeLog
+  /usr/share/doc/gpgme-1.1.4/INSTALL
+  /usr/share/doc/gpgme-1.1.4/NEWS
+  /usr/share/doc/gpgme-1.1.4/README
+  /usr/share/doc/gpgme-1.1.4/THANKS
+  /usr/share/doc/gpgme-1.1.4/TODO
   /usr/share/info/gpgme.info.gz
 
 (libgpgme11)
@@ -68,7 +71,7 @@ Files included in the binary packages:
 
 (libgpgme-devel)
   /usr/bin/gpgme-config
-  /usr/include/gpgme-1.0/gpgme.h
+  /usr/include/gpgme.h
   /usr/lib/libgpgme-pthread.dll.a
   /usr/lib/libgpgme-pthread.la
   /usr/lib/libgpgme.dll.a
@@ -78,6 +81,9 @@ Files included in the binary packages:
 ------------------
 
 Port Notes:
+
+----- version 1.1.4-1 -----
+Version bump.
 
 ----- version 1.1.2-1 -----
 Version bump.  Created separate development packages.
