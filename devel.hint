@@ -1,5 +1,5 @@
 category: Libs
-requires: cygwin libgpg-error-devel
+requires: cygwin libgpg-error-devel libgpgme11
 external-source: gpgme
 sdesc: "GnuPG cryptography support library (development)"
 ldesc: "GPGME  (GnuPG Made Easy) is a C language library that allows to 
