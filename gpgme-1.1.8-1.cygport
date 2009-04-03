@@ -1,0 +1,12 @@
+DESCRIPTION="GnuPG Made Easy library"
+HOMEPAGE="http://www.gnupg.org/related_software/gpgme/"
+SRC_URI="ftp://ftp.gnupg.org/gcrypt/${PN}/${P}.tar.bz2
+         ftp://ftp.gnupg.org/gcrypt/${PN}/${P}.tar.bz2.sig"
+
+PKG_NAMES="${PN} lib${PN}11 lib${PN}-devel"
+libgpgme11_CONTENTS="usr/bin/*-11.dll usr/share/doc/"
+libgpgme_devel_CONTENTS="usr/bin/*-config usr/include/ usr/lib/
+                         usr/share/aclocal/ usr/share/common-lisp/ usr/share/info/"
+
+DISTCLEANFILES="m4/libtool.m4"
+MAKEOPTS+=" no_undefined=-no-undefined"
