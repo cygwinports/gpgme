@@ -1,5 +1,5 @@
 category: Libs
-requires: cygwin gnupg libgcc1 libgpg-error
+requires: gnupg libgcc1 libgpg-error
 external-source: gpgme
 sdesc: "GnuPG cryptography support library (runtime)"
 ldesc: "GPGME  (GnuPG Made Easy) is a C language library that allows to 
