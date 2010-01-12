@@ -2,6 +2,7 @@ DESCRIPTION="GnuPG Made Easy library"
 HOMEPAGE="http://www.gnupg.org/related_software/gpgme/"
 SRC_URI="ftp://ftp.gnupg.org/gcrypt/${PN}/${P}.tar.bz2
          ftp://ftp.gnupg.org/gcrypt/${PN}/${P}.tar.bz2.sig"
+PATCH_URI="1.1.8-no-undefined.patch"
 
 PKG_NAMES="${PN} lib${PN}11 lib${PN}-devel"
 libgpgme11_CONTENTS="usr/bin/*-11.dll usr/share/doc/"
