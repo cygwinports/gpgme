@@ -1,6 +1,6 @@
 NAME="gpgme"
-VERSION=1.1.8
-RELEASE=2
+VERSION=1.4.2
+RELEASE=1
 CATEGORY="Libs"
 SUMMARY="GnuPG cryptography support library"
 DESCRIPTION="GPGME (GnuPG Made Easy) is a C language library that allows to
@@ -11,7 +11,7 @@ signature verification and key management."
 HOMEPAGE="http://www.gnupg.org/related_software/gpgme/"
 SRC_URI="ftp://ftp.gnupg.org/gcrypt/gpgme/gpgme-${VERSION}.tar.bz2
          ftp://ftp.gnupg.org/gcrypt/gpgme/gpgme-${VERSION}.tar.bz2.sig"
-PATCH_URI="1.1.8-no-undefined.patch"
+PATCH_URI="1.4.2-without-libassuan.patch"
 
 PKG_NAMES="libgpgme11 libgpgme-devel"
 libgpgme11_REQUIRES="gnupg"
@@ -21,4 +21,10 @@ libgpgme_devel_CONTENTS="usr/bin/*-config usr/include/ usr/lib/
 
 DISTCLEANFILES="m4/libtool.m4"
 
+CYGCONF_ARGS="
+  --with-gpg=/usr/bin/gpg
+  --without-gpgsm
+  --without-gpgconf
+  --without-g13
+"
 MAKEOPTS+=" no_undefined=-no-undefined"
