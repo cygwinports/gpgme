@@ -1,5 +1,5 @@
 NAME="gpgme"
-VERSION=1.4.2
+VERSION=1.4.4
 RELEASE=1
 CATEGORY="Libs"
 SUMMARY="GnuPG cryptography support library"
