@@ -1,5 +1,7 @@
+inherit python2 python3 qt5
+
 NAME="gpgme"
-VERSION=1.4.4
+VERSION=1.9.0
 RELEASE=1
 CATEGORY="Libs"
 SUMMARY="GnuPG cryptography support library"
@@ -11,20 +13,56 @@ signature verification and key management."
 HOMEPAGE="http://www.gnupg.org/related_software/gpgme/"
 SRC_URI="ftp://ftp.gnupg.org/gcrypt/gpgme/gpgme-${VERSION}.tar.bz2
          ftp://ftp.gnupg.org/gcrypt/gpgme/gpgme-${VERSION}.tar.bz2.sig"
-PATCH_URI="1.4.2-without-libassuan.patch"
+PATCH_URI="
+	fedora/0001-qt-pass-fmt-to-gpgrt_asprintf.patch
+	fedora/0001-don-t-add-extra-libraries-for-linking.patch
+	fedora/0001-fix-stupid-ax_python_devel.patch
+	1.9.0-qgpgme-qt5.patch
+	1.9.0-libsuffix.patch
+"
 
-PKG_NAMES="libgpgme11 libgpgme-devel"
+PKG_NAMES="libgpgme11 libgpgme-devel libgpgmepp6 libgpgmepp-devel
+	   libqgpgme-qt5_7 libqgpgme-qt5-devel python2-gpg python3-gpg"
 libgpgme11_REQUIRES="gnupg"
-libgpgme11_CONTENTS="usr/bin/*-11.dll usr/share/doc/"
-libgpgme_devel_CONTENTS="usr/bin/*-config usr/include/ usr/lib/
-                         usr/share/aclocal/ usr/share/common-lisp/ usr/share/info/"
+libgpgme11_CONTENTS="
+	usr/bin/cyggpgme-11.dll
+	usr/share/doc/
+"
+libgpgme_devel_REQUIRES="libgpg-error-devel"
+libgpgme_devel_CONTENTS="
+	usr/bin/gpgme-config
+	usr/bin/gpgme-tool.exe
+	usr/include/gpgme.h
+	usr/lib/libgpgme.dll.a
+	usr/share/aclocal/gpgme.m4
+	usr/share/common-lisp/source/gpgme/
+	usr/share/info/gpgme.info*
+"
+libgpgmepp6_SUMMARY="GPGME C++ bindings"
+libgpgmepp6_CONTENTS="usr/bin/cyggpgmepp-6.dll"
+libgpgmepp_devel_SUMMARY=${libgpgmepp6_SUMMARY}
+libgpgmepp_devel_REQUIRES="libgpg-error-devel"
+libgpgmepp_devel_CONTENTS="
+	usr/include/gpgme++/
+	usr/lib/cmake/Gpgmepp/
+	usr/lib/libgpgmepp.dll.a
+"
+libqgpgme_qt5_7_SUMMARY="GPGME Qt5 bindings"
+libqgpgme_qt5_7_CONTENTS="usr/bin/cygqgpgme-qt5-7.dll"
+libqgpgme_qt5_devel_SUMMARY=${libqgpgme_qt7_SUMMARY}
+libqgpgme_qt5_devel_REQUIRES="libgpgmepp-devel libQt5Core-devel"
+# case-sensitive directories :-(
+libqgpgme_qt5_devel_CONTENTS="
+	usr/include/QGpgME/
+	usr/include/qgpgme/
+	usr/lib/cmake/QGpgme/
+	usr/lib/libqgpgme-qt5.dll.a
+"
+python2_gpg_SUMMARY="GPGME Python 2 bindings"
+python2_gpg_CONTENTS="${PYTHON2_SITELIB#/}/gpg*"
+python3_gpg_SUMMARY="GPGME Python 3 bindings"
+python3_gpg_CONTENTS="${PYTHON3_SITELIB#/}/gpg*"
 
 DISTCLEANFILES="m4/libtool.m4"
 
-CYGCONF_ARGS="
-  --with-gpg=/usr/bin/gpg
-  --without-gpgsm
-  --without-gpgconf
-  --without-g13
-"
 MAKEOPTS+=" no_undefined=-no-undefined"

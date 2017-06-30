@@ -1,0 +1,81 @@
+--- origsrc/gpgme-1.9.0/lang/qt/src/Makefile.am	2017-03-09 02:01:10.000000000 -0600
++++ src/gpgme-1.9.0/lang/qt/src/Makefile.am	2017-06-28 17:07:54.407139600 -0500
+@@ -17,7 +17,7 @@
+ # along with this program; if not, write to the Free Software
+ # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+ # 02111-1307, USA
+-lib_LTLIBRARIES = libqgpgme.la
++lib_LTLIBRARIES = libqgpgme-qt5.la
+ EXTRA_DIST = QGpgmeConfig.cmake.in.in QGpgmeConfigVersion.cmake.in \
+              gpgme_backend_debug.h qgpgme_version.h.in \
+              QGpgmeConfig.cmake.in.in
+@@ -209,15 +209,15 @@ camelcaseincludedir = $(includedir)/QGpg
+ camelcaseinclude_HEADERS = $(camelcase_headers)
+ nodist_qgpgmeinclude_HEADERS = qgpgme_version.h
+ 
+-libqgpgme_la_SOURCES = $(qgpgme_sources) $(qgpgme_headers) $(private_qgpgme_headers)
++libqgpgme_qt5_la_SOURCES = $(qgpgme_sources) $(qgpgme_headers) $(private_qgpgme_headers)
+ 
+ AM_CPPFLAGS = -I$(top_srcdir)/lang/cpp/src -I$(top_builddir)/src \
+               @GPGME_QT_CFLAGS@ @GPG_ERROR_CFLAGS@ @LIBASSUAN_CFLAGS@ \
+               -DBUILDING_QGPGME
+ 
+-libqgpgme_la_LIBADD = ../../cpp/src/libgpgmepp.la ../../../src/libgpgme.la \
++libqgpgme_qt5_la_LIBADD = ../../cpp/src/libgpgmepp.la ../../../src/libgpgme.la \
+                        @LIBASSUAN_LIBS@ @GPGME_QT_LIBS@
+-libqgpgme_la_LDFLAGS = -no-undefined -version-info \
++libqgpgme_qt5_la_LDFLAGS = -no-undefined -version-info \
+     @LIBQGPGME_LT_CURRENT@:@LIBQGPGME_LT_REVISION@:@LIBQGPGME_LT_AGE@
+ 
+ if HAVE_MACOS_SYSTEM
+@@ -265,7 +265,7 @@ CLEANFILES = $(qgpgme_moc_sources) $(cam
+              qgpgme_version.h QGpgmeConfig.cmake.in \
+              QGpgmeConfigVersion.cmake
+ 
+-nodist_libqgpgme_la_SOURCES = $(qgpgme_moc_sources)
++nodist_libqgpgme_qt5_la_SOURCES = $(qgpgme_moc_sources)
+ 
+ .h.moc:
+ 	$(MOC) `test -f '$<' || echo '$(srcdir)/'`$< -o $@
+--- origsrc/gpgme-1.9.0/lang/qt/src/QGpgmeConfig-w32.cmake.in.in	2016-11-16 03:17:20.000000000 -0600
++++ src/gpgme-1.9.0/lang/qt/src/QGpgmeConfig-w32.cmake.in.in	2017-06-28 17:09:16.155051600 -0500
+@@ -62,14 +62,14 @@ unset(_expectedTargets)
+ add_library(QGpgme SHARED IMPORTED)
+ 
+ set_target_properties(QGpgme PROPERTIES
+-  IMPORTED_IMPLIB_RELEASE "@resolved_libdir@/libqgpgme.dll.a"
++  IMPORTED_IMPLIB_RELEASE "@resolved_libdir@/libqgpgme-qt5.dll.a"
+   INTERFACE_INCLUDE_DIRECTORIES "@resolved_includedir@/qgpgme;@resolved_includedir@"
+   INTERFACE_LINK_LIBRARIES "Gpgmepp;Qt5::Core"
+-  IMPORTED_LOCATION "@resolved_libdir@/libqgpgme-7.dll"
++  IMPORTED_LOCATION "@resolved_libdir@/libqgpgme-qt5-7.dll"
+ )
+ 
+ list(APPEND _IMPORT_CHECK_TARGETS QGgpme )
+-list(APPEND _IMPORT_CHECK_FILES_FOR_Qgpgme "@resolved_libdir@/libqgpgme.dll.a" "@resolved_bindir@/libqgpgme-7.dll" )
++list(APPEND _IMPORT_CHECK_FILES_FOR_Qgpgme "@resolved_libdir@/libqgpgme-qt5.dll.a" "@resolved_bindir@/libqgpgme-qt5-7.dll" )
+ 
+ if(CMAKE_VERSION VERSION_LESS 2.8.12)
+   message(FATAL_ERROR "This file relies on consumers using CMake 2.8.12 or greater.")
+--- origsrc/gpgme-1.9.0/lang/qt/src/QGpgmeConfig.cmake.in.in	2017-03-09 02:01:10.000000000 -0600
++++ src/gpgme-1.9.0/lang/qt/src/QGpgmeConfig.cmake.in.in	2017-06-28 17:09:28.547360700 -0500
+@@ -64,7 +64,7 @@ add_library(QGpgme SHARED IMPORTED)
+ set_target_properties(QGpgme PROPERTIES
+   INTERFACE_INCLUDE_DIRECTORIES "@resolved_includedir@/qgpgme;@resolved_includedir@"
+   INTERFACE_LINK_LIBRARIES "Gpgmepp;Qt5::Core"
+-  IMPORTED_LOCATION "@resolved_libdir@/libqgpgme@libsuffix@"
++  IMPORTED_LOCATION "@resolved_libdir@/libqgpgme-qt5@libsuffix@"
+ )
+ 
+ if(CMAKE_VERSION VERSION_LESS 2.8.12)
+--- origsrc/gpgme-1.9.0/lang/qt/tests/Makefile.am	2017-03-09 02:01:10.000000000 -0600
++++ src/gpgme-1.9.0/lang/qt/tests/Makefile.am	2017-06-28 17:08:22.839008800 -0500
+@@ -33,7 +33,7 @@ moc_files = t-keylist.moc t-keylocate.mo
+ 
+ AM_LDFLAGS = -no-install
+ 
+-LDADD = ../../cpp/src/libgpgmepp.la ../src/libqgpgme.la \
++LDADD = ../../cpp/src/libgpgmepp.la ../src/libqgpgme-qt5.la \
+         ../../../src/libgpgme.la @GPGME_QT_LIBS@ @GPG_ERROR_LIBS@ \
+         @GPGME_QTTEST_LIBS@ -lstdc++
+ 

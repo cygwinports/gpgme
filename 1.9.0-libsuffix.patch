@@ -1,0 +1,48 @@
+--- origsrc/gpgme-1.9.0/lang/cpp/src/GpgmeppConfig.cmake.in.in	2017-06-28 17:06:25.698865500 -0500
++++ src/gpgme-1.9.0/lang/cpp/src/GpgmeppConfig.cmake.in.in	2017-06-28 17:11:14.177111600 -0500
+@@ -63,8 +63,9 @@ add_library(Gpgmepp SHARED IMPORTED)
+ 
+ set_target_properties(Gpgmepp PROPERTIES
+   INTERFACE_INCLUDE_DIRECTORIES "@resolved_includedir@/gpgme++;@resolved_includedir@"
+-  INTERFACE_LINK_LIBRARIES "pthread;@resolved_libdir@/libgpgme.so"
+-  IMPORTED_LOCATION "@resolved_libdir@/libgpgmepp@libsuffix@"
++  INTERFACE_LINK_LIBRARIES "pthread;@resolved_libdir@/libgpgme@libsuffix@"
++  IMPORTED_IMPLIB "@resolved_libdir@/libgpgmepp@libsuffix@"
++  IMPORTED_LOCATION "/usr/bin/cyggpgmepp-6.dll"
+ )
+ 
+ if(CMAKE_VERSION VERSION_LESS 2.8.12)
+--- origsrc/gpgme-1.9.0/lang/cpp/src/Makefile.am	2017-03-09 02:01:10.000000000 -0600
++++ src/gpgme-1.9.0/lang/cpp/src/Makefile.am	2017-06-28 17:10:31.135427300 -0500
+@@ -74,7 +74,7 @@ libgpgmepp_la_LDFLAGS = -no-undefined -v
+ if HAVE_MACOS_SYSTEM
+ libsuffix=.dylib
+ else
+-libsuffix=.so
++libsuffix=.dll.a
+ endif
+ 
+ if HAVE_W32_SYSTEM
+--- origsrc/gpgme-1.9.0/lang/qt/src/Makefile.am	2017-03-09 02:01:10.000000000 -0600
++++ src/gpgme-1.9.0/lang/qt/src/Makefile.am	2017-06-28 17:07:54.407139600 -0500
+@@ -223,7 +223,7 @@
+ if HAVE_MACOS_SYSTEM
+ libsuffix=.dylib
+ else
+-libsuffix=.so
++libsuffix=.dll.a
+ endif
+ 
+ if HAVE_W32_SYSTEM
+--- origsrc/gpgme-1.9.0/lang/qt/src/QGpgmeConfig.cmake.in.in	2017-06-28 17:13:30.844853700 -0500
++++ src/gpgme-1.9.0/lang/qt/src/QGpgmeConfig.cmake.in.in	2017-06-28 18:05:35.444601800 -0500
+@@ -64,7 +64,8 @@ add_library(QGpgme SHARED IMPORTED)
+ set_target_properties(QGpgme PROPERTIES
+   INTERFACE_INCLUDE_DIRECTORIES "@resolved_includedir@/qgpgme;@resolved_includedir@"
+   INTERFACE_LINK_LIBRARIES "Gpgmepp;Qt5::Core"
+-  IMPORTED_LOCATION "@resolved_libdir@/libqgpgme-qt5@libsuffix@"
++  IMPORTED_IMPLIB "@resolved_libdir@/libqgpgme-qt5@libsuffix@"
++  IMPORTED_LOCATION "/usr/bin/cygqgpgme-qt5-7.dll"
+ )
+ 
+ if(CMAKE_VERSION VERSION_LESS 2.8.12)
